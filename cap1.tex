@@ -1,40 +1,52 @@
 \section{Tema}
 
-\paragraph{}Falar do que se trata o trabalho usando uma visão macroscópica (tamanho do texto: 1 ou 2 parágrafos no máximo).
+\paragraph{}O trabalho apresenta uma solução para uma das questões comumente negligenciadas dentro da área de tecnologias de Aprendizado de Máquina: a implantação e uso de modelos em ambientes não acadêmicos. A proposta executada se reserva à criação de um \textit{framework} para gerência e execução de modelos de Aprendizado de Máquina de forma a automatizar os processos relacionados ao uso de tais modelos, da coleta dos dados a serem analisados, passando por sua execução até a entrega dos resultados.
 
-\paragraph{}Sobre que grande área de conhecimento você vai falar?
+\paragraph{}Nesse trabalho são abordados princípios de Engenharia de Software, algoritmos de Aprendizado de Máquina, \textit{Job Schedulers} e desenvolvimento de aplicações web com a plataforma de desenvolvimento \textit{Django}. Objetiva-se a criação de uma plataforma genérica para a execução periódica de modelos de Aprendizado de Máquina que permita o acompanhamento da execução e resultados por diversos usuários, também facilitando a reconfiguração de agendas e gerência do \textit{workflow} de processamento em ambientes de produção.
 
-\paragraph{}Dada esta grande área, qual é o subconjunto de conhecimento sobre o qual será o seu trabalho?
+%\paragraph{}Falar do que se trata o trabalho usando uma visão macroscópica (tamanho do texto: 1 ou 2 parágrafos no máximo).
 
-\paragraph{}Qual o problema a ser resolvido?
+%\paragraph{}Sobre que grande área de conhecimento você vai falar?
+
+%\paragraph{}Dada esta grande área, qual é o subconjunto de conhecimento sobre o qual será o seu trabalho?
+
+%\paragraph{}Qual o problema a ser resolvido?
 
 
 \section{Delimitação}
 
-\paragraph{}Realizar uma delimitação informando de quem é a demanda, em que local, e em que momento no tempo. Eventualmente, pode ser mais fácil começar pensando por exclusão, ou seja, para quem não serve, onde não deve ser aplicado, e em seguida pegar o universo que sobra (tamanho do texto: livre).
+\paragraph{}O trabalho apresentado se destina a atender as demandas de agentes de todas as esferas do círculo de usuários de modelos de Aprendizado de Máquina. Enquanto necessárias execuções recorrentes de modelos, o \textit{framework} desenvolvido apresenta uma solução compatível aos principais contextos em que tais modelos se apresentam. São exceções notáveis a esse conjunto de usuários parte dos desenvolvedores de modelos de Aprendizado de Máquina que, possivelmente, não estejam interessados em praticar execução de seus modelos em ambientes de produção. Também se excluem aqueles que não possuem requisitos técnicos para a execução dos componentes necessários ao sistema, como usuários do sistema operacional Windows, usuários de bancos de dados incompatíveis com a linguagem SQL e usuários impossibilidatos de fazer uso da linguagem de programação \textit{Python 3}.
+
+%\paragraph{}Realizar uma delimitação informando de quem é a demanda, em que local, e em que momento no tempo. Eventualmente, pode ser mais fácil começar pensando por exclusão, ou seja, para quem não serve, onde não deve ser aplicado, e em seguida pegar o universo que sobra (tamanho do texto: livre).
 
 
 \section{Justificativa}
 
-\paragraph{}Apresentar o porquê do tema ser interessante de ser estudado. Cuidado, não é a motivação particular. Devem ser apresentadas razões para que alguém deva se interessar no assunto, e não quais foram suas razões particulares que motivaram você a estudá-lo (tamanho do texto: livre).
+\paragraph{} Enquanto que algoritmos e modelos matemáticos são apresentados frequentemente pelo ambiente acadêmico como soluções aproximadas de problemas reais e complexos condizentes ao que se diz respeito da área de Aprendizado de Máquina, a sua implantação em ambientes não acadêmicos ou de produção poucas vezes é abordada. Dado esse cenário, nota-se que existe espaço e demanda para o estudo e desenvolvimento de novas metodologias e plataformas que ambicionem soluções para as dificuldades envolvidas em trazer um modelo de Aprendizado de Máquina para um ambiente não acadêmico, dentre as quais, destacam-se: gerência execuções e processamento, gerência de arquivos e modelos, visualização e acompanhamento de resultados. 
+
+%\paragraph{}Apresentar o porquê do tema ser interessante de ser estudado. Cuidado, não é a motivação particular. Devem ser apresentadas razões para que alguém deva se %interessar no assunto, e não quais foram suas razões particulares que motivaram você a estudá-lo (tamanho do texto: livre).
 
 
 \section{Objetivos}
 
-\paragraph{}Informar qual é o objetivo geral do trabalho, isto é, aquilo que deve ser atendido e que corresponde ao indicador inequívoco do sucesso do seu trabalho. Pode acontecer que venha a existir um conjunto de objetivos específicos, que complementam o objetivo geral (tamanho do texto: livre, mas cuidado para não fazer uma literatura romanceada, afinal esta seção trata dos objetivos).
+\paragraph{} Objetiva-se o desenvolvimento de um \textit{framework} que permita o agendamento e acompanhamento de execuções de modelos de Aprendizado de Máquina. Uma execução caracteriza-se pela instanciação de um modelo, coleta dos dados a serem processados, execução do modelo sobre os dados coletados e persistência tanto dos resultados quanto das informações relativas à execução. Por acompanhamento, refere-se à possibilidade de usuários do \textit{framework} visualizarem os resultados das execuções, bem como de configurarem todos os aspectos da execução, como a agenda, o modelo e as bases de persistência.
+
+\paragraph{}O acima descrito será alcançado com a implementação bem sucedida de um \textit{framework} que permita que todos os detalhes descritos sejam executados, fazendo uso de um sistema de agendamento de tarefas para agendamento de execuções do modelo; uma plataforma de desenvolvimento de aplicações web para permitir o acompanhamento e gerência das execuções; bases de dados que contenham as informações dos usuários do sistema, registros detalhando as etapas das execuções do modelo e os dados a serem processados.
+
+%\paragraph{}Informar qual é o objetivo geral do trabalho, isto é, aquilo que deve ser atendido e que corresponde ao indicador inequívoco do sucesso do seu trabalho. Pode acontecer que venha a existir um conjunto de objetivos específicos, que complementam o objetivo geral (tamanho do texto: livre, mas cuidado para não fazer uma literatura romanceada, afinal esta seção trata dos objetivos).
 
 
 \section{Metodologia}
 
-\paragraph{}Como é a abordagem do assunto. Como foi feita a pesquisa, se vai houve validação, etc. Em resumo, você de explicar qual foi sua estratégia para atender ao objetivo do trabalho (tamanho do texto: livre).
+%\paragraph{}Como é a abordagem do assunto. Como foi feita a pesquisa, se vai houve validação, etc. Em resumo, você de explicar qual foi sua estratégia para atender ao objetivo do trabalho (tamanho do texto: livre).
 
 
 \section{Descrição}
 
-\paragraph{}No capítulo 2 será .....
+%\paragraph{}No capítulo 2 será .....
 
-\paragraph{}O capítulo 3 apresenta ...
+%\paragraph{}O capítulo 3 apresenta ...
 
-\paragraph{}Os .... são apresentados no capítulo 4. Nele será explicitado ...
+%\paragraph{}Os .... são apresentados no capítulo 4. Nele será explicitado ...
 
-\paragraph{}E assim vai até chegar na conclusão.
+%\paragraph{}E assim vai até chegar na conclusão.
