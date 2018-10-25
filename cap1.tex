@@ -2,7 +2,7 @@
 
 \paragraph{}O trabalho apresenta uma solução para uma das questões comumente negligenciadas dentro da área de tecnologias de Aprendizado de Máquina: a implantação e uso de modelos em ambientes não acadêmicos. A proposta executada se reserva à criação de um \textit{framework} para gerência e execução de modelos de Aprendizado de Máquina de forma a automatizar os processos relacionados ao uso de tais modelos, da coleta dos dados a serem analisados, passando por sua execução até a entrega dos resultados.
 
-\paragraph{}Nesse trabalho são abordados princípios de Engenharia de Software, algoritmos de Aprendizado de Máquina, \textit{Job Schedulers} e desenvolvimento de aplicações web com a plataforma de desenvolvimento \textit{Django}. Objetiva-se a criação de uma plataforma genérica para a execução periódica de modelos de Aprendizado de Máquina que permita o acompanhamento da execução e resultados por diversos usuários, também facilitando a reconfiguração de agendas e gerência do \textit{workflow} de processamento em ambientes de produção.
+\paragraph{}Nesse trabalho são abordados princípios de Engenharia de Software, algoritmos de Aprendizado de Máquina, \textit{Job Schedulers} e desenvolvimento de aplicações \textit{Web} com a plataforma de desenvolvimento \textit{Django}. Objetiva-se a criação de uma plataforma genérica para a execução periódica de modelos de Aprendizado de Máquina que permita o acompanhamento da execução e resultados por diversos usuários, também facilitando a reconfiguração de agendas e gerência do \textit{workflow} de processamento em ambientes de produção.
 
 %\paragraph{}Falar do que se trata o trabalho usando uma visão macroscópica (tamanho do texto: 1 ou 2 parágrafos no máximo).
 
@@ -31,10 +31,10 @@
 
 \paragraph{} Objetiva-se o desenvolvimento de um \textit{framework} que permita o agendamento e acompanhamento de execuções de modelos de Aprendizado de Máquina. Uma execução caracteriza-se pela instanciação de um modelo, coleta dos dados a serem processados, execução do modelo sobre os dados coletados e persistência tanto dos resultados quanto das informações relativas à execução. Por acompanhamento, refere-se à possibilidade de usuários do \textit{framework} visualizarem os resultados das execuções, bem como de configurarem todos os aspectos da execução, como a agenda, o modelo e as bases de persistência.
 
-\paragraph{}O acima descrito será alcançado com a implementação bem sucedida de um \textit{framework} que permita que todos os detalhes descritos sejam executados, fazendo uso de um sistema de agendamento de tarefas para agendamento de execuções do modelo; uma plataforma de desenvolvimento de aplicações web para permitir o acompanhamento e gerência das execuções; bases de dados que contenham as informações dos usuários do sistema, registros detalhando as etapas das execuções do modelo e os dados a serem processados. Dessa forma, serão objetivos parciais para se alcançar o fim desejado:
+\paragraph{}O acima descrito será alcançado com a implementação bem sucedida de um \textit{framework} que permita que todos os detalhes descritos sejam executados, fazendo uso de um sistema de agendamento de tarefas para agendamento de execuções do modelo; uma plataforma de desenvolvimento de aplicações \textit{Web} para permitir o acompanhamento e gerência das execuções; bases de dados que contenham as informações dos usuários do sistema, registros detalhando as etapas das execuções do modelo e os dados a serem processados. Dessa forma, serão objetivos parciais para se alcançar o fim desejado:
 
 \begin{enumerate}
-\item Desenvolvimento de uma aplicação web caracterizada por:
+\item Desenvolvimento de uma aplicação \textit{Web} caracterizada por:
 \begin{enumerate}
 \item Permitir agendamento de execuções de programas para processamento de modelos de Aprendizado de Máquina.
 \item Permitir a visualização de resultados e eventos gerados pelos processos agendados.
@@ -52,7 +52,9 @@
 
 \paragraph Atendendo às expectativas de um projeto de \textit{Software}, iniciou-se o projeto a partir de diagramas e modelos de Engenharia de Software que definem o funcionamento do sistema projetado. Foram elaborados: um diagrama de casos de uso, um diagrama de sequência, cinco diagramas de atividade e um diagrama de relacionamento de entidades.
 
-\paragraph{}Com o planejamento teórico concluído, foram definidas as ferrametnas de desenvolvimento do sistema. Para controle de versão foi utilizada a ferramenta \textit{Git}, com a manutenção de um repositório para todo o código produzido. Como linguagem de desenvolvimento, foi escolhida a linguagem \textit{Python 3}, que se destaca por ser uma das principais linguagens de programação dentro da comunidade de particantes de Aprendizado de Máquina \cite{StackSurvey18}.
+\paragraph{}Com o planejamento teórico concluído, foram definidas as ferrametnas de desenvolvimento do sistema. Para controle de versão foi utilizada a ferramenta \textit{Git}, com a manutenção de um repositório para todo o código produzido. Como linguagem de desenvolvimento, foi escolhida a linguagem \textit{Python 3}, que se destaca por ser uma das principais linguagens de programação dentro da comunidade de praticantes de tecnologias de Aprendizado de Máquina \cite{StackSurvey18}. Quanto ao desenvolvimento da aplicação \textit{Web}, foi selecionada a plataforma \textit{Django}, que é caracterizada por depender da mesma linguagem de programação que a escolhida para o \textit{framework} e possuir um sistema de autenticação de usuários embutido. Por fim, quanto aos bancos de dados, foram selecionados: o \textit{SQLite3} para controle de acesso dos usuários, em uma cópia local à aplicação \textit{Web}, o \textit{MySQL} para armazenamento dos eventos produzidos pelo \textit{framework} e, para o banco de coleta e persistência dos dados necessários aos modelos de Aprendizado de Máquina, um banco qualquer que possua compatibilidade com o conector genérico \textit{ODBC}, permitindo consultados \textit{SQL} genéricas.
+
+\paragraph{} <COMO SE DEU O DESENVOLVIMENTO>
 
 %\paragraph{}Como é a abordagem do assunto. Como foi feita a pesquisa, se vai houve validação, etc. Em resumo, você de explicar qual foi sua estratégia para atender ao objetivo do trabalho (tamanho do texto: livre).
 
