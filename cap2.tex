@@ -2,57 +2,20 @@
 
 \paragraph{}Sistemas de Aprendizado de Máquina são sistemas que combinam algoritmos e modelos matemáticos da área de Aprendizado de Máquina em soluções que visam a implantação do uso de tais algoritmos e modelos em ambientes reais. Aprendizado de máquina, por sua vez, se refere a área de estudos voltata ao desenvolvimento e compreensão de modelos matemáticos caracterizados pelo aprimoramento de seus resultados por meio da ingestão de dados de treino, de forma que esses modelos possam realizar predições e decisões sem que sejam explicitamente programados para o fazerem, como aponta Christopher Bishop \cite{Bishop}.
 
-%\paragraph{}Em um trabalho científico devemos ter sempre a preocupação de fazer referências precisas às idéias, frases ou conclusões de outros autores, isto é, citar a fonte (livro, revista e todo tipo de material produzido gráfica ou eletronicamente) de onde são extraídos esses dados. As citações fundamentam e melhoram a qualidade científica do trabalho, portanto, elas têm a função de oferecer ao leitor condições de comprovar a fonte das quais foram extraídas as idéias, frases ou conclusões, possibilitando-lhe ainda aprofundar o tema/assunto em discussão. Têm ainda como função, acrescentar indicações bibliográficas de reforço ao texto. Veja alguns exemplos:
+\paragraph{}Com o surgimento de equipamentos de alto poder computacional a preços acessíveis, o campo de Aprendizado de Máquina foi capaz de ser remodelado a partir de princípios e modelos que anteriormente não eram praticáveis por conta das limitações técnicas da época. Com essa mudança, o campo se tornou um foco para o surgimento de novas tecnologias que se apresentam, em grande parte, como inovações da academia e de núcleos de pesquisa. O surgimento de novos paradigmas no campo não se viu acompanhado, em mesma escala, pelo surgimento de novos sistemas e metodologias de implantação das novas tecnologias em ambientes não acadêmicos.
 
-%\paragraph{}É neste cenário que "[...] o desafiador cenário globalizado cumpre um papel essencial na formulação das formas de ação." \cite{Papadimitriou04}.
+\paragraph{}Enquanto que modelos tomadores de decisões dominam a área, sistemas que permitiriam a implantação de tais modelos em ambientes de produção se encontram pouco difundidos. Atualmente, os principais sistemas desse tipo se encontram hospedados em soluções prontas por provedores de infra-estrutura gerenciada, como é o caso do \textit{Amazon SageMaker} e do \textit{Machine Learning Studio}, soluções pagas providenciadas pela \textit{AWS} e pela \textit{Azure}. Em contrapartida, soluções abertas e gratuitas ainda dependem de um grande trabalho de desenvolvimento por parte dos responsáveis pela implantação, requerendo um esforço similar ao desenvolvido no trabalho aqui exposto.
 
-%\paragraph{}Segundo Flávio Mello \cite{BrainVoyager06}, "[...] é claro que o início da atividade geral de formação de atitudes prepara-nos para enfrentar situações atípicas decorrentes do sistema de formação de quadros que corresponde às necessidades [...]".
+\section{Agendadores de Tarefas}
 
-%\paragraph{}De acordo com Flávio Mello \cite{Heeger02}, a certificação de metodologias que nos auxiliam a lidar com o acompanhamento das preferências de consumo causa impacto indireto na reavaliação do orçamento setorial.
+\paragraph{}Para a implantação de um sistema de \textit{stream} de dados para processamento constante, é necessária uma forma para a inicialização da execução de programas e tarefas correlatas ao trabalho sendo executado. Nesse sentido, considera-se úteis ferramentas agendadoras de tarefas, ou \textit{job shedulers}. Essas são ferramentas responsáveis pela execução agendada de programas, viabilizando metas de frequencia de processamento e execução.
 
-%\paragraph{}Por outro lado, a mobilidade dos capitais internacionais garante a contribuição de um grupo importante na determinação dos índices pretendidos.  Percebemos, cada vez mais, que o novo modelo estrutural aqui preconizado deve passar por modificações independentemente das condições inegavelmente apropriadas \cite{Canguilhem80}.
+\paragraph{}Uma dessas ferramentas é o programa conhecido por \textit{slurm} \cite{Slurm}, um \textit{workload manager} capaz de realizar o agendamento de tarefas. Essa é uma das principais ferramentas de código aberto utilizada em sistemas \textit{Unix-like}, capaz de funcionar em \textit{clusters} computacionais de forma distribuída ou baseada em apenas um instância.
 
-%\paragraph{}Além disto, a expressão latina \textbf{apud} que significa: citado por, conforme, segundo é utilizada quando se faz referência a uma fonte secundária. Suponha que você teve acesso ao conteúdo do texto de Fulado através do trabalho Beltrano:
-%Não obstante, a competitividade nas transações comerciais prepara-nos para enfrentar situações atípicas decorrentes do fluxo de informações. A determinação clara de objetivos garante a contribuição de um grupo importante na determinação dos relacionamentos verticais entre as hierarquias. O incentivo ao avanço tecnológico, assim como a mobilidade dos capitais internacionais desafia a capacidade de equalização de alternativas às soluções ortodoxas (Fulano \cite{Fulano03} apud Beltrano \cite{Beltrano99}).
+\paragraph{}Outra ferramenta dessa categoria, a utilizada nesse trabalho, é o \textit{crontab}. O nome é uma abreviação de \textit{cron table}, pois se refere ao arquivo \textit{cron file} utilizado internamente para agendamento e execução de tarefas. Esse programa consiste de um arquivo no sistema operacional que periódicamente é lido, fazendo uso de expressões \textit{CRON}, e suas linhas são interpretadas como entradas de uma tabela contendo em uma coluna a expressão que define sua agenda de execução e em outra coluna o comando a ser executado como um programa de linha de comando. Seu diferencial está no fato de ser extremamente simples e possuir suporte para manipulação por meio de diversas linguagens de programação, incluindo \textit{Python 3}, a linguagem escolhida para o desenvolvimento do sistema aqui detalhado.
 
-\section{Figuras}
+\section{Desenvolvimento com Django}
 
-\paragraph{}Figuras (organogramas, fluxogramas, esquemas, desenhos, fotografias, gráficos, mapas, plantas e outros) constituem unidade autônoma e explicam, ou complementam visualmente o texto, portanto, devem ser inseridas o mais próximo possível do texto a que se referem. Sua identificação deverá aparecer na parte inferior precedida da palavra designativa (figura), seguida de seu número de ordem de ocorrência, do respectivo título e/ou legenda e da fonte, se necessário, tal como na Figura \ref{FigDel}.
+\paragraph{}O \textit{Django} \cite{Django} é um \textit{framework} de desenvolvimento de aplicações e serviços \textit{web} disponível nas linguagens de programação \textit{Python 2 e 3}, gratuito e de código aberto. Sua estrutura interna é baseada no paradigma MTV, particularmente caracterizada por uma forte e nativa integração com bancos de dados a partir de uma interface própria. Todos os componentes de uma aplicação \textit{web} são reproduzidos por meio de convenções próprias ao \textit{framework}, baseados na reusabilidade de código e orientado à integração nativa com bancos de dados diversos.
 
-\begin{figure}
-\begin{center}
-\parbox[htb]{13.0cm}
-  {
-  \begin{center}
-  \includegraphics[scale=1.0]{logo_del.eps}
-  \caption[\small{Logotipo do DEL. Fonte: DEL/Poli/UFRJ \cite{Meyer97}.}]{\label{FigDel} \small{Logotipo do DEL. Fonte: DEL/Poli/UFRJ \cite{Meyer97}.}}
-  \end{center}
-  }
-\end{center}
-\end{figure}
-
-\section{Tabelas}
-\paragraph{}As tabelas são elementos demonstrativos de síntese que apresentam informações tratadas estatisticamente constituindo uma unidade autônoma. Em sua apresentação deve ser observado: (1) o título deverá ser colocado na parte inferior, precedido da palavra Tabela e de seu número de ordem; (2) as fontes e eventuais notas aparecem em seu rodapé, após o fechamento, utilizando-se o tamanho 10; (3) Devem ser inseridas o mais próximo possível do trecho a que se referem, tal como a Tabela \ref{TabIntranet}.
-
-\begin{table}[h]
-	\begin{center}
-	  \caption{Casos de ataques aos computadores da Intranet. Fonte: DEL/Poli/UFRJ \cite{Meyer97}.}
-		\begin{tabular}{|c|c|c|}\hline
-		  \textbf{Número I}P & \textbf{Ataques} & \textbf{Ataques bem sucedidos} \\ \hline \vspace{-1.0mm}
-		  192.168.0.120 & 54 & 1 \\ \hline \vspace{-1.0mm}
-		  192.168.0.123 & 36 & 2 \\ \hline \vspace{-1.0mm}
-		  192.168.0.129 & 25 & 4 \\ \hline \vspace{-1.0mm}
-		  192.168.0.130 & 16 & 0 \\ \hline \vspace{-1.0mm}
-		  192.168.0.141 & 29 & 3 \\ \hline \vspace{-1.0mm}
-		  \textbf{Total} & \textbf{160} & \textbf{10} \\ \hline
-		\end{tabular}
-	\end{center}
-	\label{TabIntranet}
-\end{table}
-
-\section{Numeração de páginas}
-
-\paragraph{}O aluno deve observar atentamente a numeração de páginas de seu projeto. A primeira parte deste modelo de projeto final, composta pela dedicatória, agradecimento, resumo, abstract, siglas, sumário, lista de figuras e lista de tabelas, é numerada seqüencialmente utilizando algarismos romanos minúsculos. As demais folhas, descritas na segunda parte deste modelo, são numeradas seqüencialmente utilizando algarismos arábicos.
-
-\paragraph{}Contudo, exclusivamente para a segunda parte do modelo de projeto, é permitida uma numeração alternativa na qual o aluno poderá numerar as páginas por capítulo. Por exemplo, a primeira página deste Capítulo 2 - Informações Adicionais, poderia ser escrita como 2.1. Além disto, a página seguinte seria 2.2 e a presente página poderia ser escrita como 2.3. A página do Apêndice A - O que é um apêndice, poderia ser escrita como A.1, enquanto que a primeira página do apêndice B seria B.1. Neste caso alternativo específico, a Bibliografia na deverá conter numeração.
-
+\paragraph{}O desenvolvimento com o \textit{framework} é marcado pela pouca quantidade de código produzido e pelas diversas interfaces de programação providas pela plataforma. Também se destacam a a integração nativa com um sistema de administração embutido nas aplicações produzidas que fornecem, sem custos adicionais de desenvolvimento, uma aplicação e interface de autenticação de usuários também utilizável em todas as camadas de serviço contruídas paralelamente no mesmo ambiente.
