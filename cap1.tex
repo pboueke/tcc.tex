@@ -38,11 +38,12 @@
 \begin{enumerate}
 \item Permitir agendamento de execuções de programas para processamento de modelos de Aprendizado de Máquina.
 \item Permitir a visualização de resultados e eventos gerados pelos processos agendados.
+\item Permitir a execução de modelos de Aprendizado de Máquina, com a visualização dos resultados em tempo real.
 \item Se comunicar com bases de dados externas para coleta e persistência de dados.
 \item Ser reconfigurável a fim de atender ambientes diversos.
 \end{enumerate}
 \item Desenvolvimento de uma base de dados relacionais para armazenamento de eventos do \textit{framework}.
-\item Desenvolvimento de um programa agendável para execução de modelos de Aprendizado de Máquina.
+\item Desenvolvimento de um programa para execução de modelos de Aprendizado de Máquina.
 \end{enumerate}
 
 %\paragraph{}Informar qual é o objetivo geral do trabalho, isto é, aquilo que deve ser atendido e que corresponde ao indicador inequívoco do sucesso do seu trabalho. Pode acontecer que venha a existir um conjunto de objetivos específicos, que complementam o objetivo geral (tamanho do texto: livre, mas cuidado para não fazer uma literatura romanceada, afinal esta seção trata dos objetivos).
@@ -54,17 +55,15 @@
 
 \paragraph{}Com o planejamento teórico concluído, foram definidas as ferrametnas de desenvolvimento do sistema. Para controle de versão foi utilizada a ferramenta \textit{Git}, com a manutenção de um repositório para todo o código produzido. Como linguagem de desenvolvimento, foi escolhida a linguagem \textit{Python 3}, que se destaca por ser uma das principais linguagens de programação dentro da comunidade de praticantes de tecnologias de Aprendizado de Máquina \cite{StackSurvey18}. Quanto ao desenvolvimento da aplicação \textit{Web}, foi selecionada a plataforma \textit{Django}, que é caracterizada por depender da mesma linguagem de programação que a escolhida para o \textit{framework} e possuir um sistema de autenticação de usuários embutido. Por fim, quanto aos bancos de dados, foram selecionados: o \textit{SQLite3} para controle de acesso dos usuários, em uma cópia local à aplicação \textit{Web}, o \textit{MySQL} para armazenamento dos eventos produzidos pelo \textit{framework} e, para o banco de coleta e persistência dos dados necessários aos modelos de Aprendizado de Máquina, um banco qualquer que possua compatibilidade com o conector genérico \textit{ODBC}, permitindo consultados \textit{SQL} genéricas.
 
-\paragraph{} <COMO SE DEU O DESENVOLVIMENTO>
+\paragraph{} O desenvolvimento do projeto e artefatos de software relacionados se deu de maneira incremental ao longo de um período de pouco mais de dois meses, sendo guiado por reuniões e revisões frequentes entre os colaboradores envolvidos para discussão de detalhes técnicos. A validação dos resultados foi feita por meio de inspeção dos artefatos produzidos.
 
 %\paragraph{}Como é a abordagem do assunto. Como foi feita a pesquisa, se vai houve validação, etc. Em resumo, você de explicar qual foi sua estratégia para atender ao objetivo do trabalho (tamanho do texto: livre).
 
 
 \section{Descrição}
 
-%\paragraph{}No capítulo 2 será .....
+\paragraph{} No segundo capítulo será abordada a fundamentação teórica do trabalho desenvolvido, com a elaboração em cima das funções e histórico das ferramentas desenvolvidas. Serão abordados os temas: sistemas de aprendizado de máquina em ambiente de produção, ferramentas para agendamento de tarefas e desenvolvimento de software na plataforma \textit{Django}.
 
-%\paragraph{}O capítulo 3 apresenta ...
+\paragraph{} A arquitetura, as ferramentas de desenvolvimento, os resultados obtidos e sua análise serão elaborados no terceiro capítulo, enquanto que o quarto capítulo se dedicará à conclusão e trabalhos futuros.
 
-%\paragraph{}Os .... são apresentados no capítulo 4. Nele será explicitado ...
 
-%\paragraph{}E assim vai até chegar na conclusão.
