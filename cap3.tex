@@ -12,7 +12,8 @@
 \end{center}
 \end{figure}
 
-\paragraph{}O projeto desenvolvido se trata de uma aplicação \textit{Django} que conta com duas interfaces, uma para execução de um modelo preditivo em ocorrências controladas e outra para monitoramento do banco de dados, chamadas, respectivamente, de \textit{Showroom} e \textit{Monitor}. Essas duas interfaces são controladas pela aplicação por meio de duas classes de mesmo nome, vistas na figura 3.2. Os componentes da aplicação podem ser visualizados na figura 3.1, onde se observa a existência de um arquivo \textit{config.yaml}, responsável por agregar todos os parâmetros e configurações da aplicação.
+\paragraph{}O projeto desenvolvido se trata de uma aplicação \textit{Django} que conta com três interfaces, uma para execução de um modelo preditivo em ocorrências controladas, outra para monitoramento do banco de dados e outra para o disparo escalonado de predições, chamadas, respectivamente, de \textit{Showroom}, \textit{Monitor} e \textit{Disparo}. Essas três interfaces são controladas pela aplicação por meio de três classes de mesmo nome, vistas na figura 3.1. Os componentes da aplicação podem ser visualizados na figura 3.2, onde se observa a existência de um arquivo \textit{config.yaml}, responsável por agregar todos os parâmetros e configurações da aplicação.
+
 
 \begin{figure}
 \begin{center}
@@ -38,6 +39,10 @@
 \end{center}
 \end{figure}
 
+\section{Implementação}
+
+\paragraph{} No modelo seguido pelo \textit{framework Django}, o modelo \textit{MTV}, todas as páginas e interfaces da aplicação são renderizadas a partir de templates HTML preenchidos pelo controlador da aplicação, que no caso se trata do arquivo \textit{views.py}. Os templates HTML se encontram dentro do diretório \textit{templates}. Os modelos se encontram no arquivo models.py, fazendo uso direto das classes de modelo do \textit{framework}. As componentes \textit{monitor.py}, \textit{showroom.py} e \textit{disparo.py} se encontram no diretório \textit{scripts}.
+
 \subsection{Showroom}
 
 \paragraph{}A \textit{view Showroom} é caracterizada pela existência de casos sobre os quais serão inferidas classificações a partir do modelo de aprendizado de máquina carregado na aplicação. Toda execução gerada a partir dessa \textit{view} segue os passos vistos no diagrama de sequência apresentado na figura 3.4. Os dados para a predição são coletados, o evento é registrado na tabela de log de eventos, o resultado é computado e a \textit{view} é atualizada com os resultados da predição. A tabela de log de enventos, por sua vez, é populada por eventos relacionados a cada execução, representados pelas colunas da entidade \textit{ShowroomDispatch} na figura 3.3.
@@ -56,7 +61,13 @@
 
 \subsection{Monitor}
 
-\paragraph{} A \textit{view Monitor} é responsável por monitorar o estado do banco de dados usado pela aplicação e disponibilizar essa informação ao usuário. Em intervalos periódicos de tempo a \textit{view} é atualizada trazendo informações recentes do estado do banco para a interface.
+\paragraph{} A \textit{view Monitor} é responsável por monitorar: o estado de um \textit{host}, o estado do banco de dados, as datas dos último e próximo disparos e o estado do processo a ser executado. Em intervalos periódicos de tempo a \textit{view} é atualizada trazendo informações recentes para a interface.
+
+\paragraph{} Para a verificação do estado do \textit{host}, uma conexão socket é criada em uma porta aberta qualquer do host. A conexão é tida como \textit{offline} se ocorrer um timeout, sendo 10 segundos o intervalo de tempo para que isso ocorra. O host informado pode ser tanto como um endereço IPV4 quanto um endereço IPV6.
+
+\paragraph{} A verificação do estado do banco de dados é feita por meio de uma conexão, usando a cadeia de conexão adequada ao banco a ser conectado. Após a conexão ser estabelecida, é realizada uma consulta simples em uma tabela qualquer pertencente ao banco, sem que nada seja retornado, com o intuito de que todos os passos da conexão sejam testados. Caso ocorra algum problema em algum momento durante a tentativa de conexão, esse problema é reportado.
+
+\paragraph{} O último disparo e o estado do próximo disparo são monitorados fazendo uso da biblioteca \textit{crontab} para \textit{Python 3}. Tanto a agenda de execuções quanto o comando a ser executado pelo \textit{daemon cron} são obtidos por meio do uso dessa biblioteca.
 
 \section{Implantação}
 

@@ -4,7 +4,7 @@
 
 \paragraph{}Com o surgimento de equipamentos de alto poder computacional a preços acessíveis, o campo de Aprendizado de Máquina foi capaz de ser remodelado a partir de princípios e modelos que anteriormente não eram praticáveis por conta das limitações técnicas da época. Com essa mudança, o campo se tornou um foco para o surgimento de novas tecnologias que se apresentam, em grande parte, como inovações da academia e de núcleos de pesquisa. O surgimento de novos paradigmas no campo não se viu acompanhado, em mesma escala, pelo surgimento de novos sistemas e metodologias de implantação das novas tecnologias em ambientes não acadêmicos.
 
-\paragraph{}Enquanto que modelos tomadores de decisões dominam a área, sistemas que permitiriam a implantação de tais modelos em ambientes de produção se encontram pouco difundidos. Atualmente, os principais sistemas desse tipo se encontram hospedados em soluções prontas por provedores de infra-estrutura gerenciada, como é o caso do \textit{Amazon SageMaker} e do \textit{Machine Learning Studio}, soluções pagas providenciadas pela \textit{AWS} e pela \textit{Azure}. Em contrapartida, soluções abertas e gratuitas ainda dependem de um grande trabalho de desenvolvimento por parte dos responsáveis pela implantação, requerendo um esforço similar ao desenvolvido no trabalho aqui exposto.
+\paragraph{}Enquanto que modelos tomadores de decisões dominam a área, sistemas que permitiriam a implantação de tais modelos em ambientes de produção se encontram pouco difundidos. Atualmente, os principais sistemas desse tipo se encontram hospedados em soluções prontas por provedores de infra-estrutura gerenciada, como é o caso do \textit{Amazon SageMaker} e do \textit{Machine Learning Studio}, soluções pagas providenciadas pela \textit{AWS} e pela \textit{Azure}, respectivamente. Em contrapartida, soluções abertas e gratuitas ainda dependem de um grande trabalho de desenvolvimento por parte dos responsáveis pela implantação, requerendo um esforço similar ao desenvolvido no trabalho aqui exposto.
 
 \section{Agendadores de Tarefas}.
 
@@ -13,15 +13,15 @@
 
 \subsection{Slurm}
 
-\paragraph{}Uma dessas ferramentas é o programa conhecido por \textit{slurm} \cite{Slurm}, um \textit{workload manager} capaz de realizar o agendamento de tarefas. Essa é uma das principais ferramentas de código aberto utilizada em sistemas \textit{Unix-like}, capaz de funcionar em \textit{clusters} computacionais de forma distribuída ou baseada em apenas um instância. O Slurm não reqier modificações no \textit{kernel} do sistema operacional e é relativamente auto contido.
+\paragraph{}Uma dessas ferramentas é o programa conhecido por \textit{slurm} \cite{Slurm}, um \textit{workload manager} capaz de realizar o agendamento de tarefas. Essa é uma das principais ferramentas de código aberto utilizada em sistemas \textit{Unix-like}, capaz de funcionar em \textit{clusters} computacionais de forma distribuída ou baseada em apenas um instância. O Slurm não requer modificações no \textit{kernel} do sistema operacional, sendo relativamente auto contido por conta disso.
 
 \paragraph{}As três principais funções do \textit{slurm} são a alocação de recursos de maneira exclusiva e não exclusiva a usuários por um período de tempo; prover um \textit{framework} para iniciar, executar e monitorar tarefas paralelas em um conjunto de nós computacionais; arbitrar a contenção de recursos gerenciando filas de trabalhos pendentes. Sua arquitetura consiste de um daemon rodando em cada nó e um daemon central no nó principal. Os daemons provém comunicação hierárquica tolerante a falhas.
 
 \paragraph{}Os nós da rede se dividem em partições, cada uma sendo uma fila de tarefas, cada tarefa é subdividida em subtarefas, que podem ser processadas pela partição em paralelo. Uma vez alocada a um conjunto de nós, o usuário é capaz de iniciar o trabalho em paralelo no forma de subtarefas em qualquer configuração dentro da alocação de nós.
 
-\subsection{crontab}
+\subsection{Crontab}
 
-\paragraph{}Outra ferramenta dessa categoria, a utilizada nesse trabalho, é o \textit{crontab}. O nome é uma abreviação de \textit{cron table}, pois se refere ao arquivo \textit{cron file} utilizado internamente para agendamento e execução de tarefas. Esse programa consiste de um arquivo no sistema operacional que periódicamente é lido pelo \textit{cron} daemon, fazendo uso de expressões \textit{CRON}, e suas linhas são interpretadas como entradas de uma tabela contendo em uma coluna a expressão que define sua agenda de execução e em outra coluna o comando a ser executado como um programa de linha de comando. Seu diferencial está no fato de ser extremamente simples e possuir suporte para manipulação por meio de diversas linguagens de programação, incluindo \textit{Python 3}, a linguagem escolhida para o desenvolvimento do sistema aqui detalhado.
+\paragraph{}Outra ferramenta dessa categoria, a utilizada nesse trabalho, é o \textit{crontab} \cite{Crontab}. O nome é uma abreviação de \textit{cron table}, pois se refere ao arquivo \textit{cron file} utilizado internamente para agendamento e execução de tarefas. Esse programa consiste de um arquivo no sistema operacional que periodicamente é lido pelo \textit{cron} daemon, fazendo uso de expressões \textit{CRON}, e suas linhas são interpretadas como entradas de uma tabela contendo em uma coluna a expressão que define sua agenda de execução e em outra coluna o comando a ser executado como um programa de linha de comando. Seu diferencial está no fato de ser extremamente simples e possuir suporte para manipulação por meio de diversas linguagens de programação, incluindo \textit{Python 3}, a linguagem escolhida para o desenvolvimento do sistema aqui detalhado.
 
 \section{Desenvolvimento com Django}
 
@@ -30,3 +30,9 @@
 \paragraph{}O desenvolvimento com o \textit{framework} é marcado pela pouca quantidade de código produzido e pelas diversas interfaces de programação providas pela plataforma. Também se destacam a a integração nativa com um sistema de administração embutido nas aplicações produzidas que fornecem, sem custos adicionais de desenvolvimento, uma aplicação e interface de autenticação de usuários também utilizável em todas as camadas de serviço contruídas paralelamente no mesmo ambiente.
 
 \paragraph{}O \textit{framework} disponibiliza ao desenvolvedor interfaces próprias para o acesso a bancos de dados, templates para renderização de HTML, classes extensíveis para programação orientada a objetos, encaminhamento de requisições configurável, dentre outras facilidades.
+
+\section{Amazon AWS}
+
+\paragraph{} A \textit{Amazon Web Services}, ou AWS, é a maior provedora de infraestrutura em nuvem do mercado. A empresa provê serviços para websites, aplicações cliente servidor, banco de dados, análise de dados, redes, dispositivos móveis, ferramentas de gerenciamento, armazenamento de dados, aluguel de servidores entre outros \cite{AWS}. Seus serviços podem ser acessados em seu portal \textit{web} e por meio de suas \textit{API}s e \textit{SDK}s.
+
+\paragraph{} A Amazon está disponível em diversas localidades, operando \textit{datacenters} ao redor do mundo. Cada local é composto por uma região e zonas de disponibilidade, onde uma região é uma zona geográfica totalmente independente das demais, contendo diversas zonas de disponibilidade também isoladas entre si. A AWS adota, para a maioria de seus serviços, o plano de pagamento \textit{pay-as-you-go}, fazendo necessário apenas o pagamento pelos recusrsos consumidos.
