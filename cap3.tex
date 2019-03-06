@@ -1,18 +1,6 @@
 \section{Arquitetura}
 
-\begin{figure}
-\begin{center}
-\parbox[htb]{13.0cm}
-  {
-  \begin{center}
-  \includegraphics[scale=0.50]{framework.png}
-  \caption[\small{Diagrama de componentes da aplicação.}]{\label{FigDel} \small{Diagrama de componentes da aplicação.}}
-  \end{center}
-  }
-\end{center}
-\end{figure}
-
-\paragraph{}O projeto desenvolvido se trata de uma aplicação \textit{Django} que conta com três interfaces, uma para execução de um modelo preditivo em ocorrências controladas, outra para monitoramento ddos serviços associados e outra para a visualização dos resultados das predições, chamadas, respectivamente, de \textit{Showroom}, \textit{Monitor} e \textit{Disparo}. Essas três interfaces são controladas pela aplicação por meio de três classes, vistas na figura 3.2. Os componentes da aplicação podem ser visualizados na figura 3.1, onde se observa a existência de um arquivo \textit{config.yaml}, responsável por agregar todos os parâmetros e configurações da aplicação.
+\paragraph{}O projeto desenvolvido se trata de uma aplicação \textit{Django} que conta com três interfaces, uma para execução de um modelo preditivo em ocorrências controladas, outra para monitoramento dos serviços associados e outra para a visualização dos resultados das predições, chamadas, respectivamente, de \textit{Showroom}, \textit{Monitor} e \textit{Disparo}. Essas três interfaces são controladas pela aplicação por meio de três classes, vistas na figura 3.1. Os componentes da aplicação podem ser visualizados na figura 3.2, onde se observa a existência de um arquivo \textit{config.yaml}, responsável por agregar todos os parâmetros e configurações da aplicação.
 
 Além da aplicação, existem as componentes \textit{daemon.py} e \textit{datalake.py} que são responsáveis, respectivamente, pela predição de resultados e conexão com o \textit{datalake} onde estão os dados a sofrerem predições. O escalonamento de predições é gerenciado pelo \textit{crontab}, que, por sua vez, é gerenciado pela aplicação.
 
@@ -33,6 +21,17 @@ Além da aplicação, existem as componentes \textit{daemon.py} e \textit{datalake.
 \end{center}
 \end{figure}
 
+\begin{figure}
+\begin{center}
+\parbox[htb]{13.0cm}
+  {
+  \begin{center}
+  \includegraphics[scale=0.50]{framework.png}
+  \caption[\small{Diagrama de componentes da aplicação.}]{\label{FigDel} \small{Diagrama de componentes da aplicação.}}
+  \end{center}
+  }
+\end{center}
+\end{figure}
 
 \subsection{Configuração}
 
@@ -93,14 +92,14 @@ daemon.log\_file                            & \begin{tabular}[c]{@{}l@{}}Arquivo
 Grupo         & Permissões                   \\ \hline
 Admin         & Acesso a todas as interfaces \\ \hline
 DispatchUser  & Acesso à view Disparo        \\ \hline
-ShowroomUser  & Acesso ã view Showroom       \\ \hline
+ShowroomUser  & Acesso à view Showroom       \\ \hline
 \end{tabular}%
 %}
 \end{table}
 
 \subsection{Datalake}
 
-\paragraph{} A componente \textit{datalake.py} é responsável pela conexão com o \textit{datalake} que contém os dados sobre os quais serão feitas as inferências do modelo carregado na componente \textit{daemon.py}. Essa componente depende do conector ODBC e requer a instalação do \textit{driver} requerido pelo tipo do \textit{datalake} a ser acessado. A tabela 3.3 contém os métodos dessa componente.
+\paragraph{} A componente \textit{datalake.py} é responsável pela conexão com o \textit{datalake} que contém os dados sobre os quais serão feitas as inferências do modelo carregado na componente \textit{daemon.py}. A tabela 3.3 contém os métodos dessa componente.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
@@ -119,7 +118,7 @@ execute    & Executa a query SQL, retornando seu resultado                      
 
 \subsection{Showroom}
 
-\paragraph{}A \textit{view Showroom} é caracterizada pela existência de casos sobre os quais serão inferidas classificações a partir do modelo de aprendizado de máquina carregado na aplicação. Toda execução gerada a partir dessa \textit{view} segue os passos vistos no diagrama de sequência apresentado na figura 3.4. Os dados para a predição são coletados, o evento é registrado na tabela de log de eventos, o resultado é computado e a \textit{view} é atualizada com os resultados da predição. A tabela de eventos, por sua vez, é populada por eventos relacionados a cada execução, representados pelas colunas da entidade \textit{ShowroomDispatch} na figura 3.3. Os métodos do componente \textit{showroom.py} podem ser vistos na tabela 3.4.
+\paragraph{}A \textit{view Showroom} é caracterizada pela existência de casos sobre os quais serão inferidas classificações a partir do modelo de aprendizado de máquina carregado na aplicação. Toda execução gerada a partir dessa \textit{view} segue os passos vistos no diagrama de sequência apresentado na figura 3.4. Os dados para a predição são coletados, o evento é registrado na tabela de log de eventos, o resultado é computado e a \textit{view} é atualizada com os resultados da predição. A tabela de eventos, por sua vez, é populada por eventos relacionados a cada execução, representados pelas colunas da entidade \textit{ShowroomDispatch} na figura 3.3. Os dois métodos da componente \textit{showroom.py} podem ser vistos na tabela 3.4.
 
 \paragraph{}Os dois métodos representam dois casos de uso possíveis. O primeiro se trata de quando a \textit{view} é inicializada e todos os casos são inferidos, fazendo uso do método \textit{predict\_all}, o segundo se trata da inferência de apenas um dos casos assíncronamente, fazendo uso do método \textit{predict\_one}.
 
@@ -210,7 +209,7 @@ get\_last\_dispatches         & \begin{tabular}[c]{@{}l@{}}Retorna todos os even
 
 \paragraph{} O último disparo e o estado do próximo disparo são monitorados fazendo uso da biblioteca \textit{crontab} para \textit{Python 3}. Tanto a agenda de execuções quanto o comando a ser executado pelo \textit{daemon cron} são obtidos por meio do uso dessa biblioteca.
 
-\paragraph{}Além de monitorar os serviços associados ao \textit{framework}, a \textit{view} Monitor também é responsável pelo controle do estado do escalonamento da componente \textit{daemon.py}. Em sua interface, acessível apenas por administradores, é possível adicionar remover o comando de execução do \textit{script daemon.py} do arquivo \textit{crontab}, efetivamente controlando se a execução ocorrerá ou não conforme previsto pela expressão CRON presente no arquivo de configuração no parâmetro \textit{daemon.cron}, visto na tabela 3.1.
+\paragraph{}Além de monitorar os serviços associados ao \textit{framework}, a \textit{view} Monitor também é responsável pelo controle do estado do escalonamento da componente \textit{daemon.py}. Em sua interface, acessível apenas por administradores, é possível adicionar e remover o comando de execução do \textit{script daemon.py} do arquivo \textit{crontab}, efetivamente controlando se a execução ocorrerá ou não conforme previsto pela expressão CRON presente no arquivo de configuração no parâmetro \textit{daemon.cron}, visto na tabela 3.1.
 
 \begin{table}[]
 \centering
@@ -235,7 +234,7 @@ server\_is\_up          & \begin{tabular}[c]{@{}l@{}}Verifica se um host está on
 
 \subsection{Urls}
 
-\paragraph{}A componente \textit{urls.py} é responsável por descrever as rotas da aplicação. Nela os caminhos que levam às \textit{views} e às chamadas assíncronas estão detalhadas em uma lista, fazendo a associação direta entre as funções da componete \textit{views.py} e as rotas usadas pelo usuário e pela interface da aplicação.                     
+\paragraph{}A componente \textit{urls.py} é responsável por descrever as rotas da aplicação. Nela, os caminhos que levam às \textit{views} e às chamadas assíncronas estão detalhadas em uma lista, fazendo a associação direta entre as funções da componete \textit{views.py} e as rotas usadas pelo usuário e pela interface da aplicação.                     
 
 \section{Implantação}
 
@@ -259,8 +258,8 @@ server\_is\_up          & \begin{tabular}[c]{@{}l@{}}Verifica se um host está on
 
 \paragraph{}Após isso, é necessário instalar e configurar o banco da aplicação em algum servidor acessível ao servidor da aplicação, ou no mesmo servidor. Para isso, deve-se instalar o banco de dados MySQL, criar um usuário e \textit{database} para uso da aplicação e executar o comando do \textit{framework Django} que cria as tabelas a partir dos arquivos do projeto.
 
-\paragraph{}Para a conexão com o \textit{datalake}, é preciso instalar o conector \textit{ODBC} compatível com o tipo de banco de dados usado no servidor da aplicação. Por fim, é preciso configurar os parâmetros da aplicação contidos no arquivo \textit{config.yaml}, que se encontra no diretório raido projeto, conforme visto na tabela 3.1.
+\paragraph{}Para a conexão com o \textit{datalake}, é preciso instalar o conector \textit{ODBC} compatível com o tipo de banco de dados usado pelo \textit{datalake} no servidor da aplicação. Por fim, é preciso configurar os parâmetros da aplicação contidos no arquivo \textit{config.yaml}, que se encontra no diretório raiz do projeto, conforme visto na tabela 3.1.
 
 \subsection{Inicialização da aplicação}
 
-\paragraph{}Para a inicialização da aplicação, basta certificar-se de que o banco da aplicação está operacional e executar o comando que inicia a  execução.
+\paragraph{}Para a inicialização da aplicação, basta certificar-se de que o banco da aplicação está operacional e executar o comando que inicia a  execução da aplicação \textit{Django}, conforme visto no arquivo \textit{README.md}.
