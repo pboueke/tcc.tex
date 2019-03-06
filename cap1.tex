@@ -1,6 +1,6 @@
 \section{Tema}
 
-\paragraph{}O trabalho apresenta uma solução para uma das questões comumente negligenciadas dentro da área de tecnologias de Aprendizado de Máquina: a implantação e uso de modelos em ambientes não acadêmicos. A proposta executada se reserva à criação de um \textit{framework} para gerência e execução de modelos de Aprendizado de Máquina de forma a automatizar os processos relacionados ao uso de tais modelos, da coleta dos dados a serem analisados, passando por sua execução até a entrega dos resultados.
+\paragraph{}O trabalho apresenta uma solução para uma das questões comumente negligenciadas dentro da área de tecnologias de Aprendizado de Máquina: a implantação e uso de modelos em ambientes não acadêmicos. A proposta executada se reserva à criação de uma plataforma para gerência e execução de modelos de Aprendizado de Máquina de forma a automatizar os processos relacionados ao uso de tais modelos, da coleta dos dados a serem analisados, passando por sua execução até a entrega dos resultados.
 
 %\paragraph{}Falar do que se trata o trabalho usando uma visão macroscópica (tamanho do texto: 1 ou 2 parágrafos no máximo).
 
@@ -13,7 +13,7 @@
 
 \section{Delimitação}
 
-\paragraph{}O trabalho apresentado se destina a atender as demandas de agentes de todas as esferas do círculo de usuários de modelos de Aprendizado de Máquina. Enquanto necessárias execuções recorrentes de modelos, o \textit{framework} desenvolvido apresenta uma solução compatível aos principais contextos em que tais modelos se apresentam. São exceções notáveis a esse conjunto de usuários parte dos desenvolvedores de modelos de Aprendizado de Máquina que, possivelmente, não estejam interessados em praticar execução de seus modelos em ambientes de produção. Também se excluem aqueles que não possuem requisitos técnicos para a execução dos componentes necessários ao sistema, como usuários do sistema operacional Windows, usuários de bancos de dados incompatíveis com a linguagem SQL e usuários impossibilidatos de fazer uso da linguagem de programação \textit{Python 3}.
+\paragraph{}O trabalho apresentado se destina a atender as demandas de agentes de todas as esferas do círculo de usuários de modelos de Aprendizado de Máquina. Enquanto necessárias execuções recorrentes de modelos, a plataforma desenvolvida apresenta uma solução compatível aos principais contextos em que tais modelos se apresentam. São exceções notáveis a esse conjunto de usuários parte dos desenvolvedores de modelos de Aprendizado de Máquina que, possivelmente, não estejam interessados em praticar a execução de seus modelos em ambientes de produção. Também se excluem aqueles que não possuem requisitos técnicos para a execução dos componentes necessários ao sistema, como usuários do sistema operacional Windows, usuários de bancos de dados incompatíveis com a linguagem SQL e usuários impossibilidatos de fazer uso da linguagem de programação \textit{Python 3}.
 
 %\paragraph{}Realizar uma delimitação informando de quem é a demanda, em que local, e em que momento no tempo. Eventualmente, pode ser mais fácil começar pensando por exclusão, ou seja, para quem não serve, onde não deve ser aplicado, e em seguida pegar o universo que sobra (tamanho do texto: livre).
 
@@ -49,11 +49,11 @@
 
 \section{Metodologia}
 
-\paragraph{} Atendendo às expectativas de um projeto de \textit{Software}, iniciou-se o projeto a partir de diagramas e modelos de Engenharia de Software que definem o funcionamento do sistema projetado. Foram elaborados: um diagrama de casos de uso, um diagrama de sequência, cinco diagramas de atividade e um diagrama de relacionamento de entidades.
+\paragraph{} Atendendo às expectativas de um projeto de \textit{Software}, iniciou-se o projeto a partir de diagramas e modelos de Engenharia de Software que definem o funcionamento do sistema projetado. %Foram elaborados: um diagrama de casos de uso, um diagrama de sequência, cinco diagramas de atividade e um diagrama de relacionamento de entidades.
 
 \paragraph{}Com o planejamento teórico concluído, foram definidas as ferramentas de desenvolvimento do sistema. Para controle de versão foi utilizada a ferramenta \textit{Git}, com a manutenção de um repositório para todo o código produzido. Como linguagem de desenvolvimento, foi escolhida a linguagem \textit{Python 3}, que se destaca por ser uma das principais linguagens de programação dentro da comunidade de praticantes de tecnologias de Aprendizado de Máquina \cite{StackSurvey18}. Quanto ao desenvolvimento da aplicação \textit{Web}, foi selecionada a plataforma \textit{Django}, que é caracterizada por depender da mesma linguagem de programação que a escolhida para o \textit{framework} e possuir um sistema de autenticação de usuários embutido. Por fim, quanto aos bancos de dados, foram selecionados: o \textit{SQLite3} para controle de acesso dos usuários, em uma cópia local à aplicação \textit{Web}, o \textit{MySQL} para armazenamento dos eventos produzidos pelo \textit{framework} e, para o banco de coleta e persistência dos dados necessários aos modelos de Aprendizado de Máquina, um banco qualquer que possua compatibilidade com o conector genérico \textit{ODBC}, permitindo consultados \textit{SQL} genéricas.
 
-\paragraph{} O desenvolvimento do projeto e artefatos de software relacionados se deu de maneira incremental ao longo de um período de pouco mais de dois meses, sendo guiado por reuniões e revisões frequentes entre os colaboradores envolvidos para discussão de detalhes técnicos. A validação dos resultados foi feita por meio de inspeção dos artefatos produzidos.
+\paragraph{} O desenvolvimento do projeto e artefatos de software relacionados se deu de maneira incremental ao longo de um período de pouco mais de quatro meses, sendo guiado por reuniões e revisões frequentes entre os colaboradores envolvidos para discussão de detalhes técnicos. A validação dos resultados foi feita por meio de inspeção dos artefatos produzidos.
 
 %\paragraph{}Como é a abordagem do assunto. Como foi feita a pesquisa, se vai houve validação, etc. Em resumo, você de explicar qual foi sua estratégia para atender ao objetivo do trabalho (tamanho do texto: livre).
 
@@ -62,6 +62,6 @@
 
 \paragraph{} No segundo capítulo será abordada a fundamentação teórica do trabalho desenvolvido, com a elaboração em cima das funções e histórico das ferramentas desenvolvidas. Serão abordados os temas: sistemas de aprendizado de máquina em ambiente de produção, ferramentas para agendamento de tarefas e desenvolvimento de software na plataforma \textit{Django}.
 
-\paragraph{} A arquitetura, as ferramentas de desenvolvimento, os resultados obtidos e sua análise serão elaborados no terceiro capítulo, enquanto que o quarto capítulo se dedicará à conclusão e trabalhos futuros.
+\paragraph{} A porposta de plataforma, sua arquitetura e implementação serão abordados no terceiro capítulo. O quarto capítulo se dedicará à conclusão e trabalhos futuros.
 
 

@@ -25,7 +25,7 @@
 	\begin{center}
 	  \caption{Casos de ataques aos computadores da Intranet. Fonte: DEL/Poli/UFRJ \cite{Meyer97}.}
 		\begin{tabular}{|c|c|c|}\hline
-		  \textbf{NÃºmero I}P & \textbf{Ataques} & \textbf{Ataques bem sucedidos} \\ \hline \vspace{-1.0mm}
+		  \textbf{Número I}P & \textbf{Ataques} & \textbf{Ataques bem sucedidos} \\ \hline \vspace{-1.0mm}
 		  192.168.0.120 & 54 & 1 \\ \hline \vspace{-1.0mm}
 		  192.168.0.123 & 36 & 2 \\ \hline \vspace{-1.0mm}
 		  192.168.0.129 & 25 & 4 \\ \hline \vspace{-1.0mm}

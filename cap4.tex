@@ -1,2 +1,15 @@
-\section{TODO}
+\section{Conclusão}
 
+\paragraph{}Conforme observado na proposta de plataforma, a arquitetura e implementação do projeto se revelam suficientes em atender os objetivos propostos. O escalonamento de execuções de modelos de aprendizado de máquina é possível por meio do uso do \textit{crontab}, gerenciado pela aplicação \textit{web}. A visualização dos resultados e eventos é possível por meio da mesma aplicação, que, por sua vez, é configurável de diversas formas, como visto anteriormente.
+
+\paragraph{}O uso e manutenção de uma base de dados relacional para persistência dos resultados e eventos do sistema também foi coberto pela implementação e configuração do ambiente, bem como o uso de uma componente responsável pela execução dos modelos de aprendizado de máquina.
+
+\paragraph{}Com todos os pontos objetivados alcançados, tem-se o sucesso da implementação da proposta.
+
+\section{Trabalhos Futuros}
+
+\paragraph{}No curto prazo, observa-se a possibilidade de ampliar as funcionalidades da aplicação de forma que parte de suas configurações estejam disponíveis aos usuários administradores da aplicação, não dependendo mais apenas do arquivo \textit{config.yaml}. Isso se daria na forma de uma nova \textit{view} de configurações do sistema, onde parâmetros e os modelos carregados possam ser alterados.
+
+\paragraph{}Em uma escala temporal maior, existe a possibilidade da expansão do escopo da aplicação, permitindo que a mesma seja capaz de gerenciar e executar vários modelos de aprendizado de máquina, e não apenas um modelo, fazendo uso da \textit{view} descrita acima para sua configuração. Essa porposta ainda faria uso da ferramenta \textit{crontab} e permitiria que várias aplicações de modelos fossem gerenciadas em uma plataforma única, apresentando as mesmas características da plataforma desenvolvida nesse projeto. 
+
+\paragraph{}No longo prazo, atingidas as propostas anteriores, tornar-se-ia interessante a criação de uma interface programática para a execução dos modelos de aprendizado de máquina disponíveis na aplicação, por meio de uma \textit{web API}. Essa proposta permitiria que inferências sobre os modelos carregados fossem executadas sob demanda dos usuários, e não apenas por meio do escalonamento de execuções gerenciado a partir do arquivo \textit{crontab}. Essa funcionalidade abriria a possibilidade de que a plataforma fosse usada em mais contextos operacionais.
