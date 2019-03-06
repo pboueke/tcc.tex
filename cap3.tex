@@ -251,6 +251,16 @@ server\_is\_up          & \begin{tabular}[c]{@{}l@{}}Verifica se um host está on
 \end{center}
 \end{figure}
 
-\subsection{Código fonte}
+\subsection{Configuração do ambiente}
 
-\paragraph{}
+\paragraph{}Para configuraçao do ambiente, o primeiro passo é a obtenção do código fonte, que se encontra hospedado em um repositório do serviço \textit{Github}. Com o uso de uma conta autorizada a ter acesso ao repositório, é preciso realizar o download do projeto. Posteriormente, é necessário seguir as instruções presentes no arquivo \textit{README.md}, que contém detalhados todos os passos necessários para a configuração do ambiente. 
+
+\paragraph{}O primeiro é preparar o ambiente \textit{Python 3}, instalando a linguagem no servidor em que será executada a aplicação. Em seguida, é necessário criar um ambiente virtual e instalar nele todas as dependências da aplicação fazendo uso do arquivo \textit{requirements.txt}. Enfim, é preciso preparar o ambiente \textit{Django}, criando os usuários e grupos descritos no arquivo \textit{README.md}. 
+
+\paragraph{}Após isso, é necessário instalar e configurar o banco da aplicação em algum servidor acessível ao servidor da aplicação, ou no mesmo servidor. Para isso, deve-se instalar o banco de dados MySQL, criar um usuário e \textit{database} para uso da aplicação e executar o comando do \textit{framework Django} que cria as tabelas a partir dos arquivos do projeto.
+
+\paragraph{}Para a conexão com o \textit{datalake}, é preciso instalar o conector \textit{ODBC} compatível com o tipo de banco de dados usado no servidor da aplicação. Por fim, é preciso configurar os parâmetros da aplicação contidos no arquivo \textit{config.yaml}, que se encontra no diretório raido projeto, conforme visto na tabela 3.1.
+
+\subsection{Inicialização da aplicação}
+
+\paragraph{}Para a inicialização da aplicação, basta certificar-se de que o banco da aplicação está operacional e executar o comando que inicia a  execução.
