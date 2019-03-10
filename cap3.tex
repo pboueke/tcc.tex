@@ -369,9 +369,43 @@ server\_is\_up          & \begin{tabular}[c]{@{}l@{}}Verifica se um host está on
 
 \subsection{Urls}
 
-\paragraph{}A componente \textit{urls.py} é responsável por descrever as rotas da aplicação. Nela, os caminhos que levam às \textit{views} e às chamadas assíncronas estão detalhadas em uma lista, fazendo a associação direta entre as funções da componete \textit{views.py} e as rotas usadas pelo usuário e pela interface da aplicação. As rotas existentes podem ser vistas na tabela 3.7.
+\paragraph{}A componente \textit{urls.py} é responsável por descrever as rotas da aplicação. Nela, os caminhos que levam às \textit{views} e às chamadas assíncronas estão detalhadas em uma lista, fazendo a associação direta entre as funções da componete \textit{views.py} e as rotas usadas pelo usuário e pela interface da aplicação. As rotas existentes podem ser vistas na tabela 3.7. As figuras 3.6, 3.7 e 3.8 mostram as interfaces acessadas pelas rotas \textit{monitor/}, \textit{dispatch/} e \textit{showroom/}, respectivamente.
 
-   
+\begin{figure}
+\begin{center}
+\parbox[htb]{13.0cm}
+  {
+  \begin{center}
+  \includegraphics[scale=0.40]{monitor.png}
+  \caption[\small{Interface da \textit{view Monitor}.}]{\label{FigDel} \small{Interface da \textit{view Monitor}.}}
+  \end{center}
+  }
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\parbox[htb]{13.0cm}
+  {
+  \begin{center}
+  \includegraphics[scale=0.40]{dispatch.png}
+  \caption[\small{Interface da \textit{view Disparo}.}]{\label{FigDel} \small{Interface da \textit{view Disparo}.}}
+  \end{center}
+  }
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\parbox[htb]{13.0cm}
+  {
+  \begin{center}
+  \includegraphics[scale=0.40]{showroom.png}
+  \caption[\small{Interface da \textit{view Showroom}.}]{\label{FigDel} \small{Interface da \textit{view Showroom}.}}
+  \end{center}
+  }
+\end{center}
+\end{figure}
 
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
@@ -383,15 +417,15 @@ caption{Rotas definidas na componente \textit{urls.py}.}
 \hline
 Rota                             & Descrição                                                                                                 \\ \hline
 redirect/                        & Rota de redirecionamento após o \textbackslash{}textit\{login\}                                           \\ \hline
-monitor/                         & Rota para acesso à \textbackslash{}textit\{view\} Monitor                                                 \\ \hline
-dispatch/                        & Rota para acesso à \textbackslash{}textit\{view\} Disparo                                                 \\ \hline
-showroom/                        & Rota para acesso à \textbackslash{}textit\{view\} Showroom                                                \\ \hline
-dispatch/update\_dispatch/       & Rota para requisição assíncrona de atualização da \textbackslash{}textit\{view\} Disparo                  \\ \hline
-showroom/update\_showroom/       & Rota para requisição assíncrona de atualização da \textbackslash{}textit\{view\} Showroom                 \\ \hline
-showroom/update\_showroom\_item/ & Rota para requisição assíncrona de atualização de um dos items da \textbackslash{}textit\{view\} Showroom \\ \hline
-monitor/monitor\_status/         & Rota para requisição assíncrona de atualização  da \textbackslash{}textit\{view\} Monitor                 \\ \hline
-monitor/process\_kill/           & Rota para requisição assíncrona de remoção do comando no arquivo \textbackslash{}textit\{crontab\}        \\ \hline
-monitor/process\_start/          & Rota para requisição assíncrona de inserção do  comando no arquivo \textbackslash{}textit\{crontab\}      \\ \hline
+monitor/                         & Rota para acesso à \textit{view} Monitor                                                 \\ \hline
+dispatch/                        & Rota para acesso à \textit{view} Disparo                                                 \\ \hline
+showroom/                        & Rota para acesso à \textit{view} Showroom                                                \\ \hline
+dispatch/update\_dispatch/       & Rota para requisição assíncrona de atualização da \textit{view} Disparo                  \\ \hline
+showroom/update\_showroom/       & Rota para requisição assíncrona de atualização da \textit{view} Showroom                 \\ \hline
+showroom/update\_showroom\_item/ & Rota para requisição assíncrona de atualização de um dos items da \textit{view} Showroom \\ \hline
+monitor/monitor\_status/         & Rota para requisição assíncrona de atualização  da \textit{view} Monitor                 \\ \hline
+monitor/process\_kill/           & Rota para requisição assíncrona de remoção do comando no arquivo \textit{crontab}        \\ \hline
+monitor/process\_start/          & Rota para requisição assíncrona de inserção do  comando no arquivo \textit{crontab}      \\ \hline
 \end{tabular}%
 }
 \end{table}
@@ -412,16 +446,122 @@ monitor/process\_start/          & Rota para requisição assíncrona de inserção d
 
 \subsection{Configuração do ambiente}
 
-\paragraph{}Para configuraçao do ambiente, o primeiro passo é sua obtenção, que, para o caso da implantação desse projeto, foi obtido por meio do aluguel de um servidor da \textit{Amazon AWS}. O segudo é a obtenção do código fonte, que se encontra hospedado em um repositório do serviço \textit{Github}. Com o uso de uma conta autorizada a ter acesso ao repositório, é preciso realizar o download do projeto. Posteriormente, é necessário seguir as instruções presentes no arquivo \textit{README.md}, que contém detalhados todos os passos necessários para a configuração do ambiente.
+\paragraph{}Para configuraçao do ambiente, o primeiro passo é sua obtenção, que, para o caso da implantação desse projeto, foi obtido por meio do aluguel de um servidor da \textit{Amazon AWS}. O segundo é a obtenção do código fonte, que se encontra hospedado em um repositório do serviço \textit{Github}. Com o uso de uma conta autorizada a ter acesso ao repositório, é preciso realizar o download do projeto. A estrutura de arquivos e diretórios pode ser vista na figura 3.10, onde se encontram destacados todos os diretórios e componentes abordados nesse documento. Posteriormente, é necessário seguir as instruções presentes no arquivo \textit{README.md}, que contém detalhados todos os passos necessários para a configuração do ambiente. Estas instruções são detalhadas a seguir, para uso em um sistema operacional \textit{Linux}.
 
-\paragraph{}O primeiro é preparar o ambiente \textit{Python 3}, instalando a linguagem no servidor em que será executada a aplicação. Em seguida, é necessário criar um ambiente virtual e instalar nele todas as dependências da aplicação fazendo uso do arquivo \textit{requirements.txt}. Enfim, é preciso preparar o ambiente \textit{Django}, criando os usuários e grupos descritos no arquivo \textit{README.md}. 
+\begin{figure}
+\caption[\small{Estrutura do sistema de arquivos do projeto.}]{\label{FigDel} \small{Estrutura do sistema de arquivos do projeto.}}
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+[raiz
+  [default/
+    [scripts/ 
+		[daemon.py]
+		[monitor.py]
+		[dispatch.py]
+		[showroom.py]
+		[datalake.py]    
+    ]
+    [static/]
+    [templates/]
+    [templatetags/]
+    [models.py]
+    [views.py]
+    [urls.py]
+    [...]
+  ]
+  [models/]
+  [manage.py]
+  [settings.py]
+  [requirements.txt]
+  [config.yaml]
+  [README.md]
+  [...]
+]
+\end{forest}
+\end{figure}
 
-\paragraph{}Após isso, é necessário instalar e configurar o banco da aplicação em algum servidor acessível ao servidor da aplicação, ou no mesmo servidor. Para isso, deve-se instalar o banco de dados MySQL, criar um usuário e \textit{database} para uso da aplicação e executar o comando do \textit{framework Django} que cria as tabelas a partir dos arquivos do projeto.
+\paragraph{}Inicia-se a configuração a preparação do ambiente \textit{Python 3}, certificando-se de que a linguagem está instalada no servidor junto com o programa utilitário para criação de ambientes virtuais, o \textit{virtualenv}. Com esses passos concluídos, os próximos são inicializar o ambiente virtual, obter o código fonte e instalar as dependências. Esses passos são concluídos com os comandos abaixo.
 
-\paragraph{}Para a conexão com o \textit{datalake}, é preciso instalar o conector \textit{ODBC} compatível com o tipo de banco de dados usado pelo \textit{datalake} no servidor da aplicação. Por fim, é preciso configurar os parâmetros da aplicação contidos no arquivo \textit{config.yaml}, que se encontra no diretório raiz do projeto, conforme visto na tabela 3.1.
+\hfill \break
+\begin{lstlisting}[language=bash]
+$ # criar o diretório para o ambiente virtual  
+$ mkdir myenv 
+$ # obter código fonte
+$ git clone https://github.com/pboueke/ml-services-framework.git
+$ # criar e inicializar o ambiente virtual
+$ python3 -m venv myvenv
+$ source myvenv/bin/activate
+(myvenv) $ # instalar dependências
+(myvenv) $ cd ml-services-framework
+(myvenv) $ pip install -r requirements.txt
+\end{lstlisting}
 
+\paragraph{}Em seguida, é necessária a instalação do banco de dados MySQL em um servidor acessível ao servidor da aplicação, podendo ser o mesmo servidor. Para isso, siga as instruções de instalação do banco de dados para o seu sistema operacional e, em seguida, instale no servidor da aplicação a biblioteca para conexão ao banco para clientes, a \textit{libmysqlclient-dev}. Uma vez instalado, o próximo passo é configurar o banco de dados para uso da aplicação. Se conecte localmente ao banco com o comando abaixo.
 
+\hfill \break
+\begin{lstlisting}[language=bash]
+$ mysql -u USERNAME -p
+\end{lstlisting}
+
+\paragraph{}Quando conectado, execute os comandos abaixo, substituindo o termo \textit{localhost} pelo endereço apropriado ao servidor da aplicação, \textit{USERNAME} pelo nome de usuário cadastrado no serviço de banco de dados e \textit{PASSWORD} pela senha de acesso do usuário. É necessário que os dados preenchidos aqui sejam os mesmos que os preenchidos nos parâmetros \textit{mysql\_events\_db.*} do arquivo de configuração, conmforme visto na tabela 3.1.
+
+\hfill \break
+\begin{lstlisting}[language=sql]
+> CREATE DATABASE MLServicesFramework;
+> CREATE USER 'django'@'localhost' IDENTIFIED BY 'PASSWORD';
+> GRANT ALL ON MLServicesFramework.* TO 'django'@'localhost';
+> FLUSH PRIVILEGES;
+\end{lstlisting}
+
+\paragraph{}Com o banco configurado, é necessário inicializar as tabelas e modelos a partir dos arquivos do \textit{framework Django}. Para alcançar esse objetivo, basta a execução dos comandos abaixo, que transforma os modelos em \textit{Python} em tabelas do banco.
+
+\hfill \break
+\begin{lstlisting}[language=bash]
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate --database=default
+$ python3 manage.py migrate --database=app_db
+\end{lstlisting}
+
+\paragraph{}Posteriormente, é preciso criar os usuários do sistema. Para isso, executa-se o comando abaixo para criar um usuário administrador e inicia-se a aplicação para criação dos demais usuários e grupos. Com a aplicação rodando localmente é feito o acesso à interface de administração de grupos do \textit{Django}, \textit{http://127.0.0.1:8000/adm- in/auth/group/add/}, e são criados os dois grupos, \textit{DispatchUser} e \textit{ShowroomUser}, vistos na tabela 3.2. Usuários podem, então, ser criados pela interface de administração de usuários do \textit{Django}, \textit{http://127.0.0.1:8000/admin/auth/user/add/}, e atribuídos aos grupos existentes conforme a necessidade de cada um.
+
+\hfill \break
+\begin{lstlisting}[language=bash]
+$ # criar um usuário administrador
+$ python3 manage.py createsuperuser
+$ # inicia a aplicação na porta padrão
+$ python3 manage.py runserver
+\end{lstlisting}
+
+\paragraph{}Para a conexão com o \textit{datalake}, é necessária a instalação no servidor da aplicação do conector ODBC relativo ao tipo de banco de dados usado por ele. Primeiramente instale os pacotes \textit{unixodbc-dev}, \textit{unixodbc-bin} e \textit{unixodbc} e prossiga para a instalação do \textit{driver} relativo ao banco de dados específico. Note que o \textit{datalake} precisa ter uma interface ODBC, ou ele não será compatível com o  projeto.
+
+\paragraph{}Por fim, é necessária a configuração do arquivo \textit{config.yaml}, como visto na tabela 3.1. É necessária a revisão de todos os caminhos apontados pelo arquivo, assim como dados de conexão aos bancos de dados e servidores monitorados.
 
 \subsection{Inicialização da aplicação}
 
-\paragraph{}Para a inicialização da aplicação, basta certificar-se de que o banco da aplicação está operacional e executar o comando que inicia a  execução da aplicação \textit{Django}, conforme visto no arquivo \textit{README.md}.
+\paragraph{}Para a inicialização do projeto, basta a ativaçãodo ambiente virtual e execução do comando de inicialização, com a especificação da porta desejada, coforme visto abaixo.
+
+\hfill \break
+\begin{lstlisting}[language=bash]
+$ # inicializar o ambiente virtual  
+$ source myvenv/bin/activate
+$ # inicializar a aplicação
+(myenv) $ python manage.py runserver 0.0.0.0:<porta>
+\end{lstlisting}
