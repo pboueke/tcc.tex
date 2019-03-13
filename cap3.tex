@@ -206,8 +206,16 @@ get\_last\_dispatches         & \begin{tabular}[c]{@{}l@{}}Retorna todos os even
 
 \subsection{Monitor}
 
-\paragraph{} A \textit{view Monitor} é responsável por monitorar: o estado de um \textit{host}, o estado do banco de dados, as datas dos último e próximo disparos e o estado do escalonamento da componente \textit{daemon.py} a partir do arquivo \textit{crontab}. Em intervalos periódicos de tempo a \textit{view} é atualizada trazendo informações recentes para a interface, o que é feito por meio de uma requisição assíncrona chamada pela interface. A cada execução da atualização, os métodos \textit{get\_datalake\_status}, \textit{get\_process\_status}, \textit{get\_dispatch\_shedule}, \textit{get\_server\_status} e \textit{get\_db\_status} são executados pela componente \textit{view.py} e os resultados são enviados como resposta à requisição assíncrona, coforme visto no trecho de código abaixo. Os métodos dessa componente podem ser vistos na tabela 3.6.
-
+\paragraph{} A \textit{view Monitor} é responsável por monitorar: o estado de um \textit{host}, o estado do banco de dados, as datas dos último e próximo disparos e o estado do escalonamento da componente \textit{daemon.py} a partir do arquivo \textit{crontab}. Em intervalos periódicos de tempo a \textit{view} é atualizada trazendo informações recentes para a interface, o que é feito por meio de uma requisição assíncrona chamada pela interface. A cada execução da atualização, os métodos \textit{get\_datalake\_status}, \textit{get\_process\_status}, \textit{get\_dispatch\_shedule}, \textit{get\_server\_status} e \textit{get\_db\_status} são executados pela componente \textit{view.py} e os resultados são enviados como resposta à requisição assíncrona, coforme visto no trecho de código a seguir. Os métodos dessa componente podem ser vistos na tabela 3.6.
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
 \hfill \break
 \lstset{language=Python}
 \lstset{frame=lines}
@@ -233,8 +241,16 @@ def get_monitor_status(request):
     return JsonResponse(data)
 \end{lstlisting}
 
-\paragraph{} Para a verificação do estado de um servidor, uma conexão socket é criada em uma porta aberta qualquer do host. A conexão é tida como \textit{offline} se ocorrer um timeout, sendo 10 segundos o intervalo de tempo para que isso ocorra. O host informado pode ser tanto como um endereço IPV4 quanto um endereço IPV6. Ainda é possível monitorar servidores a partir de seu nome de domínio, mudando o mecanismo configurado de \textit{plain} ou \textit{ssl} para \textit{dns}, conforme visto no parâmetro \textit{monitor.controller.server.mechanism} da tabela 3.1. O método que realiza essa verificação pode ser visto abaixo.
+\paragraph{} Para a verificação do estado de um servidor, uma conexão socket é criada em uma porta aberta qualquer do host. A conexão é tida como \textit{offline} se ocorrer um timeout, sendo 10 segundos o intervalo de tempo para que isso ocorra. O host informado pode ser tanto como um endereço IPV4 quanto um endereço IPV6. Ainda é possível monitorar servidores a partir de seu nome de domínio, mudando o mecanismo configurado de \textit{plain} ou \textit{ssl} para \textit{dns}, conforme visto no parâmetro \textit{monitor.controller.server.mechanism} da tabela 3.1. O método que realiza essa verificação pode ser visto a seguir.
 
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
 \hfill \break
 \lstset{language=Python}
 \lstset{frame=lines}
@@ -265,8 +281,13 @@ def server_is_up(self,server):
          return ("error", err.__str__())
 \end{lstlisting}
 
-\paragraph{} A verificação do estado do \textit{datalake} é feita por meio de uma conexão, usando a cadeia de conexão adequada ao banco a ser conectado. Após a conexão ser estabelecida, é realizada uma consulta simples em uma tabela qualquer pertencente ao banco, sem que nada seja retornado, com o intuito de que todos os passos da conexão sejam testados. Caso ocorra algum problema em algum momento durante a tentativa de conexão, esse problema é reportado. Essa lógica pode ser vista no trecho de código abaixo.
+\paragraph{} A verificação do estado do \textit{datalake} é feita por meio de uma conexão, usando a cadeia de conexão adequada ao banco a ser conectado. Após a conexão ser estabelecida, é realizada uma consulta simples em uma tabela qualquer pertencente ao banco, sem que nada seja retornado, com o intuito de que todos os passos da conexão sejam testados. Caso ocorra algum problema em algum momento durante a tentativa de conexão, esse problema é reportado. Essa lógica pode ser vista no trecho de código a seguir.
 
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
 \hfill \break
 \lstset{language=Python}
 \lstset{frame=lines}
@@ -290,7 +311,7 @@ def get_datalake_status(self, datalake_settings):
         return { 'status': "online", 'error': ''}
 \end{lstlisting}
 
-\paragraph{} O último disparo e o estado do próximo disparo são monitorados fazendo uso da biblioteca \textit{crontab} para \textit{Python 3}. Tanto a agenda de execuções quanto o comando a ser executado pelo \textit{daemon cron} são obtidos por meio do uso dessa biblioteca. A verificação do estado do comando é feita como mostrado no trecho abaixo.
+\paragraph{} O último disparo e o estado do próximo disparo são monitorados fazendo uso da biblioteca \textit{crontab} para \textit{Python 3}. Tanto a agenda de execuções quanto o comando a ser executado pelo \textit{daemon cron} são obtidos por meio do uso dessa biblioteca. A verificação do estado do comando é feita como mostrado no trecho a seguir.
 
 \hfill \break
 \lstset{language=Python}
@@ -315,7 +336,7 @@ def get_process_status(self, config):
         return {"status": "error", "cron": expr, "error":str(e)}
 \end{lstlisting}
 
-\paragraph{}Além de monitorar os serviços associados ao \textit{framework}, a \textit{view} Monitor também é responsável pelo controle do estado do escalonamento da componente \textit{daemon.py}. Em sua interface, acessível apenas por administradores, é possível adicionar e remover o comando de execução do \textit{script daemon.py} do arquivo \textit{crontab}, efetivamente controlando se a execução ocorrerá ou não conforme previsto pela expressão CRON presente no arquivo de configuração no parâmetro \textit{daemon.cron}, visto na tabela 3.1. Esse controle é feito por meio dos métodos \textit{kill\_process} e \textit{start\_process}, vistos abaixo.
+\paragraph{}Além de monitorar os serviços associados ao \textit{framework}, a \textit{view} Monitor também é responsável pelo controle do estado do escalonamento da componente \textit{daemon.py}. Em sua interface, acessível apenas por administradores, é possível adicionar e remover o comando de execução do \textit{script daemon.py} do arquivo \textit{crontab}, efetivamente controlando se a execução ocorrerá ou não conforme previsto pela expressão CRON presente no arquivo de configuração no parâmetro \textit{daemon.cron}, visto na tabela 3.1. Esse controle é feito por meio dos métodos \textit{kill\_process} e \textit{start\_process}, vistos a seguir.
 
 \hfill \break
 \lstset{language=Python}
@@ -410,7 +431,7 @@ server\_is\_up          & \begin{tabular}[c]{@{}l@{}}Verifica se um host está on
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
 \begin{table}[]
-caption{Rotas definidas na componente \textit{urls.py}.}
+\caption{Rotas definidas na componente \textit{urls.py}.}
 \label{urls}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|}
@@ -446,7 +467,7 @@ monitor/process\_start/          & Rota para requisição assíncrona de inserção d
 
 \subsection{Configuração do ambiente}
 
-\paragraph{}Para configuraçao do ambiente, o primeiro passo é sua obtenção, que, para o caso da implantação desse projeto, foi obtido por meio do aluguel de um servidor da \textit{Amazon AWS}. O segundo é a obtenção do código fonte, que se encontra hospedado em um repositório do serviço \textit{Github}. Com o uso de uma conta autorizada a ter acesso ao repositório, é preciso realizar o download do projeto. A estrutura de arquivos e diretórios pode ser vista na figura 3.10, onde se encontram destacados todos os diretórios e componentes abordados nesse documento. Posteriormente, é necessário seguir as instruções presentes no arquivo \textit{README.md}, que contém detalhados todos os passos necessários para a configuração do ambiente. Estas instruções são detalhadas a seguir, para uso em um sistema operacional \textit{Linux}.
+\paragraph{}Para configuração do ambiente, o primeiro passo é sua obtenção, que, para o caso da implantação desse projeto, foi obtido por meio do aluguel de um servidor da \textit{Amazon AWS}. O segundo é a obtenção do código fonte, que se encontra hospedado em um repositório do serviço \textit{Github}. Com o uso de uma conta autorizada a ter acesso ao repositório, é preciso realizar o download do projeto. A estrutura de arquivos e diretórios pode ser vista na figura 3.10, onde se encontram destacados todos os diretórios e componentes abordados nesse documento. Posteriormente, é necessário seguir as instruções presentes no arquivo \textit{README.md}, que contém detalhados todos os passos necessários para a configuração do ambiente. Estas instruções são detalhadas a seguir, para uso em um sistema operacional \textit{Linux}.
 
 \begin{figure}
 \caption[\small{Estrutura do sistema de arquivos do projeto.}]{\label{FigDel} \small{Estrutura do sistema de arquivos do projeto.}}
@@ -514,14 +535,14 @@ $ source myvenv/bin/activate
 (myvenv) $ pip install -r requirements.txt
 \end{lstlisting}
 
-\paragraph{}Em seguida, é necessária a instalação do banco de dados MySQL em um servidor acessível ao servidor da aplicação, podendo ser o mesmo servidor. Para isso, siga as instruções de instalação do banco de dados para o seu sistema operacional e, em seguida, instale no servidor da aplicação a biblioteca para conexão ao banco para clientes, a \textit{libmysqlclient-dev}. Uma vez instalado, o próximo passo é configurar o banco de dados para uso da aplicação. Se conecte localmente ao banco com o comando abaixo.
+\paragraph{}Em seguida, é necessária a instalação do banco de dados MySQL em um servidor acessível ao servidor da aplicação, podendo ser o mesmo servidor. Para isso, siga as instruções de instalação do banco de dados para o seu sistema operacional e, em seguida, instale no servidor da aplicação a biblioteca para conexão ao banco para clientes, a \textit{libmysqlclient-dev}. Uma vez instalado, o próximo passo é configurar o banco de dados para uso da aplicação. Se conecte localmente ao banco com o comando a seguir.
 
 \hfill \break
 \begin{lstlisting}[language=bash]
 $ mysql -u USERNAME -p
 \end{lstlisting}
 
-\paragraph{}Quando conectado, execute os comandos abaixo, substituindo o termo \textit{localhost} pelo endereço apropriado ao servidor da aplicação, \textit{USERNAME} pelo nome de usuário cadastrado no serviço de banco de dados e \textit{PASSWORD} pela senha de acesso do usuário. É necessário que os dados preenchidos aqui sejam os mesmos que os preenchidos nos parâmetros \textit{mysql\_events\_db.*} do arquivo de configuração, conmforme visto na tabela 3.1.
+\paragraph{}Quando conectado, execute os comandos abaixo, substituindo o termo \textit{localhost} pelo endereço apropriado ao servidor da aplicação, \textit{USERNAME} pelo nome de usuário cadastrado no serviço de banco de dados e \textit{PASSWORD} pela senha de acesso do usuário. É necessário que os dados preenchidos aqui sejam os mesmos que os preenchidos nos parâmetros \textit{mysql\_events\_db.*} do arquivo de configuração, conforme visto na tabela 3.1.
 
 \hfill \break
 \begin{lstlisting}[language=sql]
@@ -531,7 +552,7 @@ $ mysql -u USERNAME -p
 > FLUSH PRIVILEGES;
 \end{lstlisting}
 
-\paragraph{}Com o banco configurado, é necessário inicializar as tabelas e modelos a partir dos arquivos do \textit{framework Django}. Para alcançar esse objetivo, basta a execução dos comandos abaixo, que transforma os modelos em \textit{Python} em tabelas do banco.
+\paragraph{}Com o banco configurado, é necessário inicializar as tabelas e modelos a partir dos arquivos do \textit{framework Django}. Para alcançar esse objetivo, basta a execução dos comandos a seguir, que transformam os modelos em \textit{Python} em tabelas do banco.
 
 \hfill \break
 \begin{lstlisting}[language=bash]
@@ -540,7 +561,7 @@ $ python3 manage.py migrate --database=default
 $ python3 manage.py migrate --database=app_db
 \end{lstlisting}
 
-\paragraph{}Posteriormente, é preciso criar os usuários do sistema. Para isso, executa-se o comando abaixo para criar um usuário administrador e inicia-se a aplicação para criação dos demais usuários e grupos. Com a aplicação rodando localmente é feito o acesso à interface de administração de grupos do \textit{Django}, \textit{http://127.0.0.1:8000/adm- in/auth/group/add/}, e são criados os dois grupos, \textit{DispatchUser} e \textit{ShowroomUser}, vistos na tabela 3.2. Usuários podem, então, ser criados pela interface de administração de usuários do \textit{Django}, \textit{http://127.0.0.1:8000/admin/auth/user/add/}, e atribuídos aos grupos existentes conforme a necessidade de cada um.
+\paragraph{}Posteriormente, é preciso criar os usuários do sistema. Para isso, executa-se o comando a seguir para criar um usuário administrador e inicia-se a aplicação para criação dos demais usuários e grupos. Com a aplicação rodando localmente é feito o acesso à interface de administração de grupos do \textit{Django}, \textit{http://127.0.0.1:8000/adm- in/auth/group/add/}, e são criados os dois grupos, \textit{DispatchUser} e \textit{ShowroomUser}, vistos na tabela 3.2. Usuários podem, então, ser criados pela interface de administração de usuários do \textit{Django}, \textit{http://127.0.0.1:8000/admin/auth/user/add/}, e atribuídos aos grupos existentes conforme a necessidade de cada um.
 
 \hfill \break
 \begin{lstlisting}[language=bash]
@@ -563,5 +584,5 @@ $ python3 manage.py runserver
 $ # inicializar o ambiente virtual  
 $ source myvenv/bin/activate
 $ # inicializar a aplicação
-(myenv) $ python manage.py runserver 0.0.0.0:<porta>
+(myenv) $ python3 manage.py runserver <seu_ip:<porta>
 \end{lstlisting}
