@@ -2,7 +2,9 @@
 
 \paragraph{}O projeto desenvolvido se trata de uma aplicação \textit{Django} que conta com três interfaces, uma para execução de um modelo preditivo em ocorrências controladas, outra para monitoramento dos serviços associados e outra para a visualização dos resultados das predições, chamadas, respectivamente, de \textit{Showroom}, \textit{Monitor} e \textit{Disparo}. Essas três interfaces são controladas pela aplicação por meio de três classes, vistas na figura 3.1. Os componentes da aplicação podem ser visualizados na figura 3.2, onde se observa a existência de um arquivo \textit{config.yaml}, responsável por agregar todos os parâmetros e configurações da aplicação.
 
-Além da aplicação, existem as componentes \textit{daemon.py} e \textit{datalake.py} que são responsáveis, respectivamente, pela predição de resultados e conexão com o \textit{datalake} onde estão os dados a sofrerem predições. O escalonamento de predições é gerenciado pelo \textit{crontab}, que, por sua vez, é gerenciado pela aplicação.
+\paragraph{}Além da aplicação, existem as componentes \textit{daemon.py} e \textit{datalake.py} que são responsáveis, respectivamente, pela predição de resultados e conexão com o \textit{datalake} onde estão os dados a sofrerem predições. O \textit{datalake} se trata de um serviço de banco de dados externo ao escopo da aplicação, pelo qual são acessados os dados a serem processados. O escalonamento de predições é gerenciado pelo \textit{crontab}, que, por sua vez, é gerenciado pela aplicação.
+
+\paragraph{}A arquitetura como um todo é delimitada pela restrição de que apenas um modelo de aprendizado de máquina é carregado na aplicação. A componente \textit{daemon.py} é responsável pela execução de apenas desse modelo, sendo todas as etapas de configuração e implantação condicionadas a esse fato.
 
 
 \section{Implementação}
@@ -76,7 +78,7 @@ daemon.log\_file                            & \begin{tabular}[c]{@{}l@{}}Arquivo
 
 \subsection{View}
 
-\paragraph{}Em aplicações que fazem uso do \textit{framework Django}, a componente \textit{view.py}, vista na figura 3.1, é responsável pelo controle e recebimento das requisições à aplicação. Essa componente é vista como um pacote da linguagem \textit{Python} e contém as funções responsáveis por enviar o HTML a ser visualizado pelo usuário e responder todas as chamadas assíncronas requisitadas pelas interfaces.
+\paragraph{}Em aplicações que fazem uso do \textit{framework Django}, a componente \textit{view.py}, vista na figura 3.1, é responsável pelo controle e recebimento das requisições à aplicação. Essa componente é um pacote da linguagem \textit{Python} e contém as funções responsáveis por enviar o HTML a ser visualizado pelo usuário e responder todas as chamadas assíncronas requisitadas pelas interfaces.
 
 \paragraph{}É por meio dessa componente que o controle de acesso às páginas da aplicação é realizado, com o uso de decoradores especiais que restrigem o acesso a certas chamadas a depender do tipo de usuário que está acessando a aplicação. A tabela 3.2 mostra os possíveis grupos atribuídos a usuários, com suas respectivas permissões. A criação dos usuários e atribuição de  grupos está detalhada na seção 3.3. 
 
@@ -125,7 +127,7 @@ execute    & Executa uma query SQL, retornando seu resultado                    
 
 \paragraph{}A \textit{view Showroom} é caracterizada pela existência de casos sobre os quais serão inferidas classificações a partir do modelo de aprendizado de máquina carregado na aplicação. Toda execução gerada a partir dessa \textit{view} segue os passos vistos no diagrama de sequência apresentado na figura 3.4. Os dados para a predição são coletados, o evento é registrado na tabela de log de eventos, o resultado é computado e a \textit{view} é atualizada com os resultados da predição. A tabela de eventos, por sua vez, é populada por eventos relacionados a cada execução, representados pelas colunas da entidade \textit{ShowroomDispatch} na figura 3.3. Os dois métodos da componente \textit{showroom.py} podem ser vistos na tabela 3.4.
 
-\paragraph{}Os dois métodos representam dois casos de uso possíveis. O primeiro se trata de quando a \textit{view} é inicializada e todos os casos são inferidos, fazendo uso do método \textit{predict\_all}, o segundo se trata da inferência de apenas um dos casos assincronamente, fazendo uso do método \textit{predict\_one}.
+\paragraph{}Os dois métodos representam dois casos de uso possíveis. O primeiro se trata de quando a \textit{view} é inicializada e todos os casos são inferidos, fazendo uso do método \textit{predict\_all}, o segundo se trata da inferência de apenas um dos casos assincronamente, fazendo uso do método \textit{predict\_one}. Essa \textit{view} tem como objetivo demonstrar a execução do modelo de aprendizado em tempo real, de forma que os efeitos da parametrização dos registros fiquem claros aos usuários.
 
 \begin{table}[]
 \centering
@@ -187,6 +189,8 @@ predict\_one & Faz o mesmo que predict\_all, porém apenas para a linha 'id' do a
 
 \paragraph{} A \textit{view Disparo} é responsável por permitir a visualização dos disparos executados, onde cada disparo é dado pela execução do script de inferência. Nela é possível visualizar todos os disparos executados pela componente \textit{daemon.py} a partir de um filtro temporal. Todos os resultados de todas as predições dentro do intervalo temporal selecionado são visualizados em tabelas, uma tabela para cada disparo. Os métodos dessa componente podem ser vistos na tabela 3.5, referente à componente dispatch.py.
 
+\paragraph{} Essa \textit{view} tem como objetivo disponibilizar uma interface para auditoria dos disparos e predições realizadas, permitindo que os usuários inspecionem todos os dados produzidos pela plataforma.
+
 \begin{table}[]
 \centering
 \caption{Métodos do componente \textit{dispatch.py}.}
@@ -207,16 +211,7 @@ get\_last\_dispatches         & \begin{tabular}[c]{@{}l@{}}Retorna todos os even
 \subsection{Monitor}
 
 \paragraph{} A \textit{view Monitor} é responsável por monitorar: o estado de um \textit{host}, o estado do banco de dados, as datas dos último e próximo disparos e o estado do escalonamento da componente \textit{daemon.py} a partir do arquivo \textit{crontab}. Em intervalos periódicos de tempo a \textit{view} é atualizada trazendo informações recentes para a interface, o que é feito por meio de uma requisição assíncrona chamada pela interface. A cada execução da atualização, os métodos \textit{get\_datalake\_status}, \textit{get\_process\_status}, \textit{get\_dispatch\_shedule}, \textit{get\_server\_status} e \textit{get\_db\_status} são executados pela componente \textit{view.py} e os resultados são enviados como resposta à requisição assíncrona, coforme visto no trecho de código a seguir. Os métodos dessa componente podem ser vistos na tabela 3.6.
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
+
 \lstset{language=Python}
 \lstset{frame=lines}
 %\lstset{caption={Insert code directly in your document}}
@@ -242,7 +237,6 @@ def get_monitor_status(request):
 \end{lstlisting}
 
 \paragraph{} Para a verificação do estado de um servidor, uma conexão socket é criada em uma porta aberta qualquer do host. A conexão é tida como \textit{offline} se ocorrer um timeout, sendo 10 segundos o intervalo de tempo para que isso ocorra. O host informado pode ser tanto como um endereço IPV4 quanto um endereço IPV6. Ainda é possível monitorar servidores a partir de seu nome de domínio, mudando o mecanismo configurado de \textit{plain} ou \textit{ssl} para \textit{dns}, conforme visto no parâmetro \textit{monitor.controller.server.mechanism} da tabela 3.1. O método que realiza essa verificação pode ser visto a seguir.
-
 \hfill \break
 \hfill \break
 \hfill \break
